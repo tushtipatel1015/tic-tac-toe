@@ -93,9 +93,6 @@ function render() {
         `).join("")}
       </div>
       <div class="row">
-        <button id="reset">Reset</button>
-      </div>
-      <div class="row">
         <button id="reset">Reset Board</button>
         <button id="resetScore">Reset Score</button>
     </div>
