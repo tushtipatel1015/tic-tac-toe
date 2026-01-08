@@ -8,6 +8,8 @@ let winner = null;
 
 const score_key = "ttt_score_v1";
 
+// added leaderboard
+
 function loadScore() {
   try {
     const raw = localStorage.getItem(score_key);
