@@ -6,7 +6,7 @@ h1 { font-size: 20px; margin: 0 0 12px; }
 .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 .cell {
   height: 88px; font-size: 40px; font-weight: 700;
-  border: 1px solid #1e1e1e; border-radius: 10px; background-color: #00e5ff; color: white;
+  border: 1px solid #0a3a57; border-radius: 10px; background-color: #9bc5de; color: white;
   cursor: pointer;
 }
 .cell:disabled { cursor: not-allowed; opacity: 0.7; }
