@@ -80,7 +80,7 @@ function handleClick(i) {
   const current = xIsNext ? "X" : "O";
 
   // if playing agaisnt computer, only allow the user (X) to click
-  if (mode === "comp" && current !== playerSymbol) return;
+  if (mode === "computer" && current !== playerSymbol) return;
 
   board[i] = current;
   xIsNext = !xIsNext;
@@ -88,7 +88,7 @@ function handleClick(i) {
   winner = calculateWinner(board);
 
   // if game isn't over and we're in computer mode, let computer play immediately
-  if (!winner && !isDraw(board) && mode === "comp") {
+  if (!winner && !isDraw(board) && mode === "computer") {
     aiMove();
   }
 
@@ -111,7 +111,7 @@ function render() {
       <h1>Tic Tac Toe</h1>
       <div class="row" style="margin-bottom:12px;">
         <button id="friendMode" ${mode === "friend" ? "disabled" : ""}>2 Player</button>
-        <button id="compMode" ${mode === "comp" ? "disabled" : ""}>Vs Computer</button>
+        <button id="computerMode" ${mode === "computer" ? "disabled" : ""}>Vs Computer</button>
       </div>
       <div class="status">${statusText}</div>
       <div style="display:flex; gap:8px; margin: 0 0 12px;">
@@ -150,8 +150,8 @@ function render() {
     reset();
   });
   
-  app.querySelector("#compMode").addEventListener("click", () => {
-    mode = "comp";
+  app.querySelector("#computerMode").addEventListener("click", () => {
+    mode = "computer";
     reset();
   });  
 
