@@ -15,8 +15,8 @@ const score_key = "ttt_score_v1";
 
 function emptySpaces(board){
   const out = [];
-  for (let i = 0; i < b.length; i++)
-    if (!b[i]) out.push(i);
+  for (let i = 0; i < board.length; i++)
+    if (!board[i]) out.push(i);
   return out;
 }
 
@@ -26,7 +26,7 @@ function aiMove() {
   if (empties.length === 0) return;
 
   const choice = empties[Math.floor(Math.random() * empties.length)];
-  board[choice] = compSymbol;
+  board[choice] = computer;
   xIsNext = true; // after O plays, it's X's turn
   winner = calculateWinner(board);
 }
@@ -138,7 +138,6 @@ function render() {
   });
   app.querySelector("#reset").addEventListener("click", reset);
 
-  app.querySelector("#reset").addEventListener("click", reset);
   app.querySelector("#resetScore").addEventListener("click", () => {
     score = { X: 0, O: 0, draws: 0 };
     saveScore(score);
