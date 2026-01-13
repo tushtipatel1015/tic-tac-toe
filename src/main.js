@@ -49,6 +49,23 @@ function saveScore(score) {
   localStorage.setItem(score_key, JSON.stringify(score));
 }
 
+function updateScore() { // updates score once game ends
+  const w = calculateWinner(board);
+  if (w) {
+    score[w] += 1;        // score["X"] or score["O"]
+    saveScore(score);
+    return true;
+  }
+  if (isDraw(board)) {
+    score.draws += 1;
+    saveScore(score);
+    return true;
+  }
+  return false;
+}
+
+
+
 let score = loadScore();
 
 function calculateWinner(b) {
@@ -86,10 +103,15 @@ function handleClick(i) {
   xIsNext = !xIsNext;
 
   winner = calculateWinner(board);
+  if (updateScore()) {
+    render();
+    return;
+  }
 
   // if game isn't over and we're in computer mode, let computer play immediately
   if (!winner && !isDraw(board) && mode === "computer") {
     aiMove();
+    updateScore();
   }
 
   render();
