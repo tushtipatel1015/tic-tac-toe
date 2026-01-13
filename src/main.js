@@ -89,6 +89,7 @@ function reset() {
   board = Array(9).fill(null);
   xIsNext = true;
   winner = null;
+  computerThinking();
   render();
 }
 
@@ -125,7 +126,7 @@ function handleClick(i) {
 
       aiMove(); 
       updateScore(); 
-      
+
       computerThinking = false;
       render();
     }, 2000);
@@ -138,9 +139,11 @@ function render() {
   const draw = isDraw(board);
 
   const statusText = w
-    ? `Winner: ${w}`
-    : draw
-      ? "Draw!"
+  ? `Winner: ${w}`
+  : draw
+    ? "Draw!"
+    : mode === "computer" && computerThinking
+      ? "Computer is thinking..."
       : `Next: ${xIsNext ? "X" : "O"}`;
 
   app.innerHTML = `
