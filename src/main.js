@@ -8,7 +8,6 @@ let winner = null;
 let mode = "friend";
 let computer = "O";
 let user = "X";
-let computerThinking = false; // adding a buffer before the computer makes a move
 
 const score_key = "ttt_score_v1";
 
@@ -89,7 +88,6 @@ function reset() {
   board = Array(9).fill(null);
   xIsNext = true;
   winner = null;
-  computerThinking();
   render();
 }
 
@@ -103,34 +101,20 @@ function handleClick(i) {
 
   board[i] = current;
   xIsNext = !xIsNext;
-  winner = calculateWinner(board);
 
+  winner = calculateWinner(board);
   if (updateScore()) {
     render();
     return;
   }
 
-  render();
-
   // if game isn't over and we're in computer mode, let computer play immediately
-  if (mode === "computer") {
-    computerThinking = true;
-
-    setTimeout(() => {
-      // game might have ended or been reset while waiting
-      if (winner || isDraw(board)) {
-        computerThinking = false;
-        render();
-        return;
-      }
-
-      aiMove(); 
-      updateScore(); 
-
-      computerThinking = false;
-      render();
-    }, 2000);
+  if (!winner && !isDraw(board) && mode === "computer") {
+    aiMove();
+    updateScore();
   }
+
+  render();
 }
 
 
@@ -139,11 +123,9 @@ function render() {
   const draw = isDraw(board);
 
   const statusText = w
-  ? `Winner: ${w}`
-  : draw
-    ? "Draw!"
-    : mode === "computer" && computerThinking
-      ? "Computer is thinking..."
+    ? `Winner: ${w}`
+    : draw
+      ? "Draw!"
       : `Next: ${xIsNext ? "X" : "O"}`;
 
   app.innerHTML = `
