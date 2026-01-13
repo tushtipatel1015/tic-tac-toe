@@ -80,7 +80,7 @@ function handleClick(i) {
   const current = xIsNext ? "X" : "O";
 
   // if playing agaisnt computer, only allow the user (X) to click
-  if (mode === "computer" && current !== playerSymbol) return;
+  if (mode === "computer" && current !== user) return;
 
   board[i] = current;
   xIsNext = !xIsNext;
